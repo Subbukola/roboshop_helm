@@ -1,0 +1,8 @@
+configMapRef: 
+  mongo_url: "mongodb://mongodb:27017/catalogue"
+
+deployment: 
+  replicas: 2
+  image_name: catalogue
+  image_version: 1.0
+
