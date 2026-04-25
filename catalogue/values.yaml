@@ -4,5 +4,5 @@ configMap:
 deployment: 
   replicas: 2
   image_name: catalogue
-  image_version: 1.0
+  image_version: "1.0"
 
