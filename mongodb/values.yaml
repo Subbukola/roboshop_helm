@@ -1,0 +1,7 @@
+service:
+  name: mongodb
+
+deployment:
+  replicas: 3
+  image_version: mongodb.1.0
+

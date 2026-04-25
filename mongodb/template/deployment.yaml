@@ -1,0 +1,33 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata: 
+  name: mongodb
+  namespace: roboshop
+  labels:
+    env: dev
+    component: mongodb
+    project: roboshop
+
+spec:
+  replicas: {{ .Values.deployment.replicas}}
+  selector:
+    matchLabels:
+      env: dev
+      component: mongodb
+      project: roboshop
+  template:
+    metadata:
+      labels:
+        env: dev
+        component: mongodb
+        project: roboshop
+    spec:
+      containers:
+        - name: mongodb 
+          image: subbukola541/{{ .Values.deployment.image_version}}
+
+          
+      
+
+
+
