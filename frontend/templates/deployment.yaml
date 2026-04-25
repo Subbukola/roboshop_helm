@@ -1,0 +1,62 @@
+---
+
+apiVersion: apps/v1 
+kind: Deployment
+metadata: 
+  name: frontend 
+  namespace: roboshop
+  labels:
+    env: dev
+    component: frontend 
+    project: roboshop
+
+spec:
+  replicas: {{ .Values.deployment.replicas}}
+  selector:
+    matchLabels:
+      env: dev
+      component: frontend
+      project: roboshop
+  template:
+    metadata:
+      labels:
+        env: dev
+        component: frontend 
+        project: roboshop
+    spec:
+      volumes:
+          - name: nginx-config 
+            configMap:
+              name: frontend
+      containers:
+        - name: frontend 
+          image: subbukola541/{{ .Values.deployment.image_name}}:{{ .Values.deployment.image_version}}
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "100m"
+            limits:
+              memory: "800Mi"
+              cpu: "1000m"
+
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 2          
+              
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 2  
+
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf   
+              subPath: nginx.conf               
+              readOnly: true
+
