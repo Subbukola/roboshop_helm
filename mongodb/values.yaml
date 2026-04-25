@@ -3,5 +3,5 @@ service:
 
 deployment:
   replicas: 3
-  image_version: mongodb.1.0
+  image_version: mongodb:1.0
 
