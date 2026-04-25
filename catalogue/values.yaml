@@ -1,5 +1,5 @@
 configMapRef: 
-  mongo_url: "mongodb://mongodb:27017/catalogue"
+  mongo_url: mongodb://mongodb:27017/catalogue
 
 deployment: 
   replicas: 2
